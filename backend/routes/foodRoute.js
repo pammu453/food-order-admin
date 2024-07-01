@@ -7,6 +7,8 @@ import path from 'path';
 
 const router = express.Router()
 
+const __dirname = path.resolve()
+
 // image storage Engine
 const uploadDir = path.join(__dirname, '../../backend/uploads');
 if (!fs.existsSync(uploadDir)) {
