@@ -15,7 +15,7 @@ const Order = () => {
             }
         };
         fetchOrders();
-    }, [BASE_URL]);
+    }, []);
 
     const handleStatusChange = (orderId, newStatus) => {
         setOrders(prevOrders =>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./List.css"
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -7,11 +7,13 @@ const List = () => {
 
   const [food_list, setFoodList] = useState([])
 
-  const getFoodList = async () => {
-    const res = await axios.get(`/api/food/getAllFoodItems`)
-    setFoodList(res.data.foodItems)
-  }
-  getFoodList()
+  useEffect(()=>{
+    const getFoodList = async () => {
+      const res = await axios.get(`/api/food/getAllFoodItems`)
+      setFoodList(res.data.foodItems)
+    }
+    getFoodList()
+  },[])
 
   const deleteFoodItem = async (id) => {
     const { data } = await axios.delete(`/api/food/deleteFood/${id}`)
