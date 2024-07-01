@@ -5,12 +5,10 @@ import axios from 'axios';
 const Order = () => {
     const [orders, setOrders] = useState([]);
 
-    const BASE_URL = import.meta.env.VITE_BASE_URL;
-
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/order/adminOrders`);
+                const response = await axios.get(`/api/order/adminOrders`);
                 setOrders(response.data.orders);
             } catch (error) {
                 console.error("Error fetching orders", error);
@@ -30,7 +28,7 @@ const Order = () => {
     const handleSubmit = async (e, orderId, status) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${BASE_URL}/order/updateOrder`, {
+            const response = await axios.post(`/api/order/updateOrder`, {
                 orderId,
                 status,
             });
@@ -70,7 +68,7 @@ const Order = () => {
                                 <div className="order-items">
                                     {order.items.map(item => (
                                         <div key={item._id} className="order-item">
-                                            <img src={`${BASE_URL}/images/${item.image}`} alt={item.name} />
+                                            <img src={`/api/images/${item.image}`} alt={item.name} />
                                             <div>
                                                 <h4>{item.name}</h4>
                                                 <p>₹{item.price}</p>

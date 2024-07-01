@@ -15,8 +15,6 @@ const Add = () => {
 
   const [image, setImage] = useState(null);
 
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,7 +26,7 @@ const Add = () => {
     formData.append('image', productDetail.image);
 
     try {
-      const { data } = await axios.post(`${BASE_URL}/food/addFoodItem`, formData, {
+      const { data } = await axios.post(`/api/food/addFoodItem`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

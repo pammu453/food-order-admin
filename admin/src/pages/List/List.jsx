@@ -6,16 +6,15 @@ import { toast } from 'react-toastify'
 const List = () => {
 
   const [food_list, setFoodList] = useState([])
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const getFoodList = async () => {
-    const res = await axios.get(`${BASE_URL}/food/getAllFoodItems`)
+    const res = await axios.get(`/api/food/getAllFoodItems`)
     setFoodList(res.data.foodItems)
   }
   getFoodList()
 
   const deleteFoodItem = async (id) => {
-    const {data}=await axios.delete(`${BASE_URL}/food/deleteFood/${id}`)
+    const { data } = await axios.delete(`/api/food/deleteFood/${id}`)
     toast.success(data.message)
     getFoodList()
   }
@@ -34,7 +33,7 @@ const List = () => {
         {
           food_list.map((item, index) => (
             <div className="list-item" key={index}>
-              <img src={`http://localhost:5000/api/images/${item.image}`} alt="" />
+              <img src={`/api/images/${item.image}`} alt="" />
               <p>{item.name}</p>
               <p>{item.category}</p>
               <p>₹{item.price}</p>
