@@ -7,19 +7,31 @@ const List = () => {
 
   const [food_list, setFoodList] = useState([])
 
-  useEffect(()=>{
-    const getFoodList = async () => {
-      const res = await axios.get(`/api/food/getAllFoodItems`)
-      setFoodList(res.data.foodItems)
+  const getFoodList = async () => {
+    try {
+      const res = await axios.get(`/api/food/getAllFoodItems`);
+      setFoodList(res.data.foodItems);
+    } catch (error) {
+      console.error('Error fetching food items:', error);
+      toast.error('Failed to fetch food items');
     }
-    getFoodList()
-  },[])
+  };
+
+  useEffect(() => {
+    getFoodList();
+  }, []);
 
   const deleteFoodItem = async (id) => {
-    const { data } = await axios.delete(`/api/food/deleteFood/${id}`)
-    toast.success(data.message)
-    getFoodList()
-  }
+    try {
+      const { data } = await axios.delete(`/api/food/deleteFood/${id}`);
+      toast.success(data.message);
+      getFoodList(); // Refresh the food list after deleting
+    } catch (error) {
+      console.error('Error deleting food item:', error);
+      toast.error('Failed to delete food item');
+    }
+  };
+
 
   return (
     <div className='list'>
