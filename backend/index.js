@@ -24,10 +24,6 @@ const __dirname = path.resolve()
 app.use(express.json())
 app.use(cors())
 
-//router config
-app.get("/", (req, res) => {
-    res.send("API working")
-})
 
 //api routes
 app.use("/api/food", foodRouter)
